@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['slide-show'],
   attributeBindings: ['style'],
   style: computed('activeImage', function () {
-    return `background: url('${this.get("activeImage")}') no-repeat center center fixed; background-size: cover;`;
+    return `background: url('${this.get("activeImage")}') no-repeat center center fixed; background-size: cover; -webkit-transition: background-image 0.5s ease-in-out; transition: background-image 0.5s ease-in-out;`;
   }),
 
   images: computed(function () {
@@ -26,8 +26,16 @@ export default Ember.Component.extend({
   }),
 
   activeImageIndex: 0,
+  nextImageIndex: computed('activeImageIndex', 'numberOfImages', function () {
+    return (this.get('activeImageIndex') + 1) % this.get('numberOfImages');
+  }),
+
   activeImage: computed('activeImageIndex', 'images', function () {
     return this.get('images').objectAt(this.get('activeImageIndex'));
+  }),
+
+  nextImage: computed('nextImageIndex', 'images', function () {
+    return this.get('images').objectAt(this.get('nextImageIndex'));
   }),
 
   speed: 5000,
@@ -44,16 +52,22 @@ export default Ember.Component.extend({
   }.on('willDestroyElement'),
 
   scheduleNextIteration: function () {
-    this.set('runner', run.later(this, () => {
-      // increment active image index
-      const activeImageIndex = this.get('activeImageIndex');
-      const nextImageIndex = (activeImageIndex+1) % this.get('numberOfImages');
-      this.set('activeImageIndex', nextImageIndex);
+    const img = new Image();
 
-      // schedule next change
-      const runLater = this.get('runner');
-      run.cancel(runLater);
-      this.set('runner', this.scheduleNextIteration());
-    }, this.get('speed')));
+    img.onload = () => {
+      delete img;
+
+      this.set('runner', run.later(this, () => {
+        // increment active image index
+        this.set('activeImageIndex', this.get('nextImageIndex'));
+
+        // schedule next change
+        const runLater = this.get('runner');
+        run.cancel(runLater);
+        this.set('runner', this.scheduleNextIteration());
+      }, this.get('speed')));
+    };
+
+    img.src = this.get('nextImage');
   }
 });
