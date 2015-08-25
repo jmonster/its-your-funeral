@@ -4,6 +4,10 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'its-your-funeral',
     environment: environment,
+    contentSecurityPolicy: {
+      'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com",
+      'style-src': "'self' 'unsafe-inline'"
+    },
     baseURL: '/',
     locationType: 'auto',
     firebase: 'https://its-your-funeral.firebaseio.com/',

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['slide-show'],
   attributeBindings: ['style'],
   style: computed('activeImage', function () {
-    return `background: url('${this.get("activeImage")}'); background-size: cover;`;
+    return `background: url('${this.get("activeImage")}') no-repeat center center fixed; background-size: cover;`;
   }),
 
   images: computed(function () {
