@@ -55,8 +55,6 @@ export default Ember.Component.extend({
     const img = new Image();
 
     img.onload = () => {
-      delete img;
-
       this.set('runner', run.later(this, () => {
         // increment active image index
         this.set('activeImageIndex', this.get('nextImageIndex'));

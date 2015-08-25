@@ -20,6 +20,9 @@ module.exports = function(environment) {
         }
       }
     },
+    dotEnv: {
+      clientAllowedKeys: ['DROPBOX_APP_KEY']
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

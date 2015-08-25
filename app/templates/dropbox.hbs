@@ -1,3 +1,8 @@
 {{outlet}}
 
-{{async-button action="connectToDropbox" default="Login" pending="please wait :)"}}
+{{#if session.currentUser.dropboxUid}}
+  Hello, {{session.currentUser.dropboxUid}}
+  {{async-button action="disconnectFromDropbox" default="Disconnect" pending="seeya!"}}
+{{else}}
+  {{async-button action="connectToDropbox" default="Connect" pending="please wait :)"}}
+{{/if}}

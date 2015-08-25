@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   firebase: Ember.inject.service(),
 
   beforeModel: function() {
-    this.get('session').fetch().catch(() => {});
+    return this.get('session').fetch().catch(() => {});
   },
 
   actions: {
@@ -35,7 +35,7 @@ export default Ember.Route.extend({
         console.error(err);
       });
     },
-    
+
     signOut: function() {
       this.get('session').close();
     }
