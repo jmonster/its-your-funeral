@@ -6,6 +6,16 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    firebase: 'https://its-your-funeral.firebaseio.com/',
+    torii: {
+      'sessionServiceName': 'session',
+      'providers': {
+        'dropbox-oauth2': {
+          'apiKey': process.env.DROPBOX_APP_KEY,
+          'session': 'session'
+        }
+      }
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
