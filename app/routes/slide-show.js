@@ -10,14 +10,16 @@ export default Ember.Route.extend({
     const dropboxToken = this.get('session.currentUser.dropboxToken');
 
     return this.get('dropbox').metadata(dropboxToken, '/', {
-      list: true,
-      // include_media_info: true
-    })
-    .then((metadata) => {
-      return metadata.contents.map((file) => file.path);
-    });
+        list: true
+      })
+      .then((metadata) => {
+        const paths = metadata.contents.map((file) => file.path);
 
-
-    return files;
+        return Ember.RSVP.all(paths.map((path) => {
+          return this.get('dropbox')
+                     .media(dropboxToken, path)
+                     .then((media) => media.url);
+        }));
+      });
   }
 });

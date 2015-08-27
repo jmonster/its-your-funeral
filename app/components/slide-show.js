@@ -11,17 +11,8 @@ export default Ember.Component.extend({
     return `background: url('${this.get("activeImage")}') no-repeat center center fixed; background-size: cover; -webkit-transition: background-image 0.5s ease-in-out; transition: background-image 0.5s ease-in-out;`;
   }),
 
-  images: computed(function () {
-    return shuffle([
-      '/sample-images/1.jpg',
-      '/sample-images/2.jpg',
-      '/sample-images/3.jpg',
-      '/sample-images/4.jpg',
-      '/sample-images/5.jpg',
-      // '/sample-images/6.jpg',
-      // '/sample-images/7.jpg',
-      // '/sample-images/8.jpg'
-    ]);
+  shuffledImages: computed('images', function () {
+    return shuffle(this.get('images'));
   }),
 
   numberOfImages: computed('images.@each', function () {
@@ -34,11 +25,11 @@ export default Ember.Component.extend({
   }),
 
   activeImage: computed('activeImageIndex', 'images', function () {
-    return this.get('images').objectAt(this.get('activeImageIndex'));
+    return this.get('shuffledImages').objectAt(this.get('activeImageIndex'));
   }),
 
   nextImage: computed('nextImageIndex', 'images', function () {
-    return this.get('images').objectAt(this.get('nextImageIndex'));
+    return this.get('shuffledImages').objectAt(this.get('nextImageIndex'));
   }),
 
   speed: 5000,

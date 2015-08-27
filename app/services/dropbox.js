@@ -43,5 +43,20 @@ export default Ember.Service.extend({
         'Authorization': `Bearer ${token}`
       }
     });
+  },
+
+  media: function (token, path) {
+
+    const uri = `https://api.dropboxapi.com/1/media/auto/${path}`;
+
+    path = path || {};
+
+    return ajax(uri, {
+      method: 'post',
+      dataType: 'json',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
   }
 });
