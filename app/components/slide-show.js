@@ -1,5 +1,8 @@
 import Ember from 'ember';
+import _collection from 'lodash/collection';
+
 const { computed, run } = Ember;
+const { shuffle } = _collection;
 
 export default Ember.Component.extend({
   classNames: ['slide-show'],
@@ -9,7 +12,7 @@ export default Ember.Component.extend({
   }),
 
   images: computed(function () {
-    return [
+    return shuffle([
       '/sample-images/1.jpg',
       '/sample-images/2.jpg',
       '/sample-images/3.jpg',
@@ -18,7 +21,7 @@ export default Ember.Component.extend({
       // '/sample-images/6.jpg',
       // '/sample-images/7.jpg',
       // '/sample-images/8.jpg'
-    ];
+    ]);
   }),
 
   numberOfImages: computed('images.@each', function () {
