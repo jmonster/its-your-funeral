@@ -1,6 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
+  beforeModel: function(transition) {
+    const dropboxToken = this.get('session.currentUser.dropboxToken');
+
+    if (dropboxToken) {
+      return this.transitionTo('slide-show');
+    }
+  },
+
   actions: {
     connectToDropbox: function (asyncBtn) {
 
