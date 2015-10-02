@@ -70,7 +70,7 @@ export default Ember.Object.extend({
    * @return {Object} An updated property hash
    */
   extractUserProperties(authData) {
-    var name = 'Unknown';
+    var name;
     var provider = authData.provider;
     var userData = authData[provider];
 
