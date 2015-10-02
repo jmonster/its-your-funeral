@@ -3,8 +3,14 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   firebase: Ember.inject.service(),
 
-  beforeModel: function() {
-    return this.get('session').fetch().catch(() => {});
+  beforeModel: function(transition) {
+    return this.get('session').fetch().catch(() => {
+
+      // user is not logged in
+      if (transition.targetName !== 'login'){
+        this.transitionTo('login');
+      }
+    });
   },
 
   actions: {
