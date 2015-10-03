@@ -8,7 +8,7 @@ export default Ember.Service.extend({
   // Retrieves information about the user's account.
   info: function () {
 
-    const uri = 'https://api.dropboxapi.com/1/account/info';
+    // const uri = 'https://api.dropboxapi.com/1/account/info';
   },
 
   // Downloads a file.

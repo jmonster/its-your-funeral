@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-  beforeModel: function(transition) {
+  beforeModel: function(/*transition*/) {
     const isAuthenticated = this.get('session.isAuthenticated');
 
     if (isAuthenticated) {

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-const { computed, on } = Ember;
 
 export default Ember.Route.extend({
 
