@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('login');
   this.route('slide-show');
   this.route('dropbox');
+  this.route('uploader');
 });
 
 export default Router;

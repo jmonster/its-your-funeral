@@ -5,8 +5,9 @@ module.exports = function(environment) {
     modulePrefix: 'its-your-funeral',
     environment: environment,
     contentSecurityPolicy: {
-      'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com",
-      'style-src': "'self' 'unsafe-inline'"
+      'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com https://api.dropboxapi.com  https://content.dropboxapi.com",
+      'style-src': "'self' 'unsafe-inline'",
+      'img-src': "'self' https://dl.dropboxusercontent.com"
     },
     baseURL: '/',
     locationType: 'auto',
